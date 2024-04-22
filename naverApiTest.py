@@ -5,7 +5,7 @@ import urllib.request
 client_id = "My_ID"
 client_secret = "API_key"
 encText = urllib.parse.quote("이란")
-url = "https://openapi.naver.com/v1/search/news?query=" + encText # JSON 결과
+url = "https://openapi.naver.com/v1/search/news.json?query=" + encText # JSON 결과
 
 request = urllib.request.Request(url)
 request.add_header("X-Naver-Client-Id",client_id)
