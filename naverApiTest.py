@@ -16,6 +16,7 @@ if(rescode==200):
     response_body = response.read()
     print(response_body.decode('utf-8'))
 else:
-    print("Error Code:" + rescode)
-    # 기본값이 최근 10개
+    print("Error Code:" + rescode)  # 기본값이 최근 10개
+
+
 
