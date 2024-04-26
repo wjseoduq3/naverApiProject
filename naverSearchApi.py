@@ -10,8 +10,8 @@ class NaverApi:
     def getRequestUrlCode(self, url):
         requestUrl = Request(url)
 
-        client_id = "JkLI65jPvG0LGIvTm2b7"
-        client_secret = "API_key"
+        client_id = "ObWMjVg0pDkE2qP1ThA_"
+        client_secret = "Zagi_qOOA3"
 
         requestUrl.add_header("X-Naver-Client-Id", client_id)
         requestUrl.add_header("X-Naver-Client-Secret", client_secret)

@@ -2,8 +2,8 @@
 import os
 import sys
 import urllib.request
-client_id = "My_ID"
-client_secret = "API_key"
+client_id = "ObWMjVg0pDkE2qP1ThA_"
+client_secret = "Zagi_qOOA3"
 encText = urllib.parse.quote("이란")
 url = "https://openapi.naver.com/v1/search/news?query=" + encText # JSON 결과
 
