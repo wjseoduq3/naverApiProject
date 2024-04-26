@@ -6,6 +6,8 @@ from PyQt5 import uic
 
 from naverSearchApi import *
 
+import webbrowser
+
 form_class = uic.loadUiType("ui/naverNewsSearchAppUi.ui")[0]
 # 외부에서 ui 불러올 때 [0]/ 내부 [1]
 
@@ -19,7 +21,8 @@ class MainWindow(QMainWindow, form_class):
         self.statusBar().showMessage("Naver News Search App v1.0")
 
         self.searchBtn.clicked.connect(self.searchBtn_clicked)
-
+        self.result_table.doubleClicked.connect(self.link_doubleClicked)
+        # 테이블 항목이 더블클릭되면 이 함수 호출
 
     def searchBtn_clicked(self):
         keyword = self.input_keyword.text()
@@ -48,13 +51,22 @@ class MainWindow(QMainWindow, form_class):
         # 테이블에 출력되는 검색결과를 더블클릭해도 수정 못하게 함
         self.result_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
+        for i, news in enumerate(newsResult):  # i -> 0~9
+            newsTitle = news['title']
+            newsTitle = newsTitle.replace('&quot','').replace(';','').replace('<b>','').replace('</b>','')
+            newsLink = news['originallink']
+            newsDate = news['pubDate']
+            newsDate = newsDate[0:25]
 
+            self.result_table.setItem(i,0, QTableWidgetItem(newsTitle))
+            self.result_table.setItem(i,1, QTableWidgetItem(newsLink))
+            self.result_table.setItem(i,2, QTableWidgetItem(newsLink))
 
-
-
-
-
-
+    # 해당기사 더블클릭시 해당 사이트 연결 기능
+    def link_doubleClicked(self):
+        selectedRow = self.result_table.currentRow()  # 현재 더블클릭된 행의 인덱스 가져오기
+        selectedLink =  self.result_table.item(selectedRow, 1).text()  # 현재 더블클릭된 셀의 텍스트 가져오기
+        webbrowser.open(selectedLink)
 
 
 app = QApplication(sys.argv)
